@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+{% block body %}
+<a href="/__random"><button>random</button></a>
+<h1>{{ data['title'] | replace('_', ' ') | capitalize | safe }}</h1>
+{% if data['type'] == 'img' %}
+<img src="{{ url_for('static', filename=data['source']) }}" />
+{% else %}
+{% endif %}
+{% endblock %}
