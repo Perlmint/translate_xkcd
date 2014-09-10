@@ -26,6 +26,33 @@ body {
 	text-align: center;
 }
 
+#tweet-button {
+        background: #00aced;
+}
+
+#tweet-button:hover {
+        background: white;
+        color: #00aced;
+}
+
+#fb-button {
+	background: #3b5998;
+}
+
+#fb-button:hover {
+	background: white;
+	color: #3b5998;
+}
+
+#g-plus-button {
+	background: #d04229;
+}
+
+#g-plus-button:hover {
+	background: white;
+	color: #d04229;
+}
+
 #license, #ccl > div {
 	padding-top: 10px;
 	display: table;

@@ -55,10 +55,18 @@
       </div>
       <div id="footer">
         <div id="share">
-          <a href="https://twitter.com/share" class="twitter-share-button" data-lang="en">Tweet</a>
+          <a href="https://twitter.com/share">
+            <button id="tweet-button">Tweet</button>
+          </a>
           <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="https://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
-          <div class="fb-like" data-layout="button_count" data-action="like" data-show-faces="false" data-share="true"></div>
-          <div class="g-plusone" data-size="medium"></div>
+          <!--
+          <a class="facebook" data-evt="Facebook-Share">
+            <button id="fb-button">Facebook</button>
+          </a>
+          <a href="https://plus.google.com/share" onclick="javascript:window.open(this.href, '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');return false;">
+            <button id="g-plus-button">g+</button>
+          </a>
+          --!>
         </div>
         <div id="origin_source">
           <a href="http://xkcd.com/1195">원본 링크</a>
