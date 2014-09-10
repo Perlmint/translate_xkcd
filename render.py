@@ -5,6 +5,7 @@ from glob import glob
 
 DOMAIN = 'xkcd.omniavinco.kr'
 BASE_URL = 'http://%s' % DOMAIN
+SITE_OWNER = "@omniavinco"
 WORK_ROOT = os.path.dirname(os.path.abspath(__file__))
 TEMPLATE_PATH = os.path.join(WORK_ROOT, 'templates')
 RES_PATH = os.path.join(WORK_ROOT, 'res')
@@ -33,6 +34,7 @@ def parse_info_file(filename):
   dict['metas']['twitter:domain'] = DOMAIN
   dict['metas']['twitter:title'] = dict['title']
   dict['metas']['twitter:creator'] = dict['creator']
+  dict['metas']['twitter:site'] = SITE_OWNER
 
   if dict['type'] == "image":
     dict['metas']['twitter:card'] = 'photo'
