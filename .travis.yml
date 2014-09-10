@@ -8,6 +8,9 @@ script:
 - chmod 600 .travis/deploy_key.pem
 - eval `ssh-agent -s`
 - ssh-add .travis/deploy_key.pem
+- git config user.email "omniavinco@gmail.com"
+- git config user.name "Gyusun Yeom"
+- git config push.default simple
 - git remote add deploy git@github.com:omniavinco/translate_xkcd.git
 - git fetch deploy
 - git checkout -b gh-pages deploy/gh-pages
