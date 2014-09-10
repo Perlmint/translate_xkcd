@@ -18,5 +18,6 @@ script:
 - git commit -m"Static page generated"
 - git push deploy
 before_install:
+- mkdir -p .travis
 - openssl aes-256-cbc -K $encrypted_bd2a943abb02_key -iv $encrypted_bd2a943abb02_iv
   -in deploy_key.pem.enc -out .travis/deploy_key.pem -d
