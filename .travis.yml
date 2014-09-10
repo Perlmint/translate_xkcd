@@ -6,12 +6,13 @@ install:
 script:
 - python render.py
 - chmod 600 .travis/deploy_key.pem
+- eval `ssh-agent -s`
 - ssh-add .travis/deploy_key.pem
 - git remote add deploy git@github.com:omniavinco/translate_xkcd.git
 - git fetch deploy
 - git checkout -b gh-pages deploy/gh-pages
 - find . -maxdepth 1 -name "*.html" -exec git rm --ignore-unmatch -q {} \;
-- git rm --ignore-unmatch -q res
+- git rm --ignore-unmatch -q -r res
 - git checkout master -- res
 - mv out/*.html .
 - git add res *.html
