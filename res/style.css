@@ -22,6 +22,10 @@ body {
 	margin-top: 10px;
 }
 
+#share {
+	text-align: center;
+}
+
 #license, #ccl > div {
 	padding-top: 10px;
 	display: table;
