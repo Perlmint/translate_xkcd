@@ -56,7 +56,8 @@ def render_random(file_list):
 def url_for(namespace, **kwargs):
   url_set = {
     'res': '%s/res/{filename}' % BASE_URL,
-    'content': '%s/{target}.html' % BASE_URL
+    'content': '%s/{target}.html' % BASE_URL,
+    'source': 'https://github.com/omniavinco/translate_xkcd'
     }
   return url_set[namespace].format(**kwargs)
 
