@@ -10,3 +10,6 @@ out
 # temporary files
 *.pyc
 *.*~
+
+# travis
+.travis
