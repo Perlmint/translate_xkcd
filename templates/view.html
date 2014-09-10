@@ -1,9 +1,17 @@
 {% extends "base.html" %}
 {% block body %}
+{% if prev %}
+<a href="{{ url_for('content', target=prev) }}"><button>&lt;</button></a>
+{% endif %}
+{% if False %}
 <a href="/__random"><button>random</button></a>
-<h1>{{ data['title'] | replace('_', ' ') | capitalize | safe }}</h1>
-{% if data['type'] == 'img' %}
-<img src="{{ url_for('static', filename=data['source']) }}" />
+{% endif %}
+{% if next %}
+<a href="{{ url_for('content', target=next) }}"><button>&gt;</button></a>
+{% endif %}
+<h1>{{ title | replace('_', ' ') | capitalize | safe }}</h1>
+{% if type == 'image' %}
+<img src="{{ url_for('res', filename=source) }}" />
 {% else %}
 {% endif %}
 {% endblock %}

@@ -3,8 +3,10 @@
   <head>
     <meta name="viewport" content="width=device-width, user-scalable=no">
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+		<link rel="icon" href="{{ url_for('res', filename='favicon.ico') }}" type="image/x-icon">
+		<link rel="shortcut icon" href="{{ url_for('res', filename='favicon.ico') }}" type="image/x-icon">
     <title>{{ title }}</title>
-    <link rel="stylesheet" type="text/css" href="/res/style.css" />
+    <link rel="stylesheet" type="text/css" href="{{ url_for('res', filename='style.css') }}" />
 		{% for key, value in metas.items() %}
 		<meta name="{{ key }}" content="{{ value }}" />
 		{% endfor %}
@@ -13,7 +15,7 @@
 		<div id="container">
 			<div>
 				<a href="/">
-					<img src="/res/logo.png" />
+					<img src="{{ url_for('res', filename='logo.png') }}" />
 				</a>
 			</div>
 			<div id="content">
@@ -21,7 +23,7 @@
 			</div>
 	  	<div id="footer">
 				<div id="origin_source">
-					<a href="http://xkcd.com/{{ data['id'] | default('') }}">원본 링크</a>
+					<a href="http://xkcd.com/{{ id | default('') }}">원본 링크</a>
 				</div>
 				<div id="license">
 					<div id="license-font">
@@ -34,7 +36,7 @@
 							<div>
 								<div>
 									<a rel="license" href="http://creativecommons.org/licenses/by-nc/2.5/">
-										<img alt="크리에이티브 커먼즈 라이선스" src="/res/by-nc.png" width="88"/>
+										<img alt="크리에이티브 커먼즈 라이선스" src="{{ url_for('res', filename='by-nc.png') }}" width="88"/>
 									</a>
 								</div>
 								<div>이 저작물은 <a rel="license" href="http://creativecommons.org/licenses/by-nc/2.5/">크리에이티브 커먼즈 저작자표시-비영리 2.5 일반 라이선스</a>에 따라 이용할 수 있습니다.
