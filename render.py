@@ -3,7 +3,8 @@ from jinja2 import Environment, FileSystemLoader
 import os, imp
 from glob import glob
 
-BASE_URL = 'http://xkcd.omniavinco.kr'
+DOMAIN = 'xkcd.omniavinco.kr'
+BASE_URL = 'http://%s' % DOMAIN
 WORK_ROOT = os.path.dirname(os.path.abspath(__file__))
 TEMPLATE_PATH = os.path.join(WORK_ROOT, 'templates')
 RES_PATH = os.path.join(WORK_ROOT, 'res')
@@ -25,6 +26,18 @@ def get_file_list():
 def parse_info_file(filename):
   dict = imp.load_source('', filename).__dict__
   dict['id'] = os.path.basename(dict['__file__']).rsplit('.', 1)[0].split('.', 1)[0]
+  
+  if 'metas' not in dict:
+    dict['metas'] = {}
+
+  dict['metas']['twitter:domain'] = DOMAIN
+  dict['metas']['twitter:title'] = dict['title']
+  dict['metas']['twitter:creator'] = dict['creator']
+
+  if dict['type'] == "image":
+    dict['metas']['twitter:card'] = 'photo'
+    dict['metas']['twitter:image:src'] = url_for('res', filename=dict['source'])
+
   return dict
 
 def make_redirect_page(source, target):
