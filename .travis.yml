@@ -19,8 +19,7 @@ script:
 - git checkout master -- res
 - mv out/*.html .
 - git add res *.html
-- git commit -m"Static page generated"
-- git push deploy
+- if [ `git diff --cached | wc -l` -ne 0 ] ; then  git commit -m"Static page generated" && git push deploy; fi
 before_install:
 - mkdir -p .travis
 - openssl aes-256-cbc -K $encrypted_bd2a943abb02_key -iv $encrypted_bd2a943abb02_iv
