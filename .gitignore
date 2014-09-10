@@ -1,4 +1,12 @@
+# virtualenv
 bin
 lib
 include
 local
+
+# render result
+out
+
+# temporary files
+*.pyc
+*.*~
