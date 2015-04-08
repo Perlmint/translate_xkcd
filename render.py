@@ -53,6 +53,10 @@ def render_content(template, data):
 def render_random(file_list):
   out_pat = os.path.join(OUT_PATH, 'random.js')
 
+def render_index(file_list):
+  out_path = os.path.join(OUT_PATH, 'index.html')
+  env.get_template('index.html').stream({ 'list': file_list }).dump(out_path, encoding='utf-8')
+
 def url_for(namespace, **kwargs):
   url_set = {
     'res': '%s/res/{filename}' % BASE_URL,
@@ -72,11 +76,18 @@ def get_target_name(file_name):
     return os.path.basename(file_name).rsplit('.', 1)[0]
   return file_name
 
+file_infos = []
 for file_index in range(len(file_list)):
   next_file = file_list[file_index + 1] if len(file_list) > file_index + 1 else None
   info = parse_info_file(file_name)
   info['prev'] = get_target_name(prev_file)
+  info['cur'] = get_target_name(file_name)
   info['next'] = get_target_name(next_file)
-  render_content(env.get_template('view.html'), info)
+  file_infos.append(info.copy())
   prev_file = file_name
   file_name = next_file
+
+for info in file_infos:
+  render_content(env.get_template('view.html'), info)
+
+render_index(file_infos)

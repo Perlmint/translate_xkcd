@@ -7,9 +7,11 @@
     <link rel="shortcut icon" href="{{ url_for('res', filename='favicon.ico') }}" type="image/x-icon">
     <title>{{ title }}</title>
     <link rel="stylesheet" type="text/css" href="{{ url_for('res', filename='style.css') }}" />
+    {%- if metas %}
     {% for key, value in metas.items() %}
     <meta name="{{ key }}" content="{{ value }}" />
     {% endfor %}
+    {% endif -%}
   </head>
   <body>
     <script src="https://apis.google.com/js/platform.js" async defer>{lang: 'ko'}</script>

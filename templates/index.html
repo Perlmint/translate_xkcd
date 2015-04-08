@@ -1,2 +1,12 @@
 {% extends "base.html" %}
 {% set data = {'title' : "xkcd"} %}
+{% block body %}
+<h2>목록</h2>
+<ol id="all_list">
+{% for info in list %}
+<li>
+  <a href="{{ url_for('content', target=info['cur']) }}">{{ info['id'] }} {{ info['title'] }}</a>
+</li>
+{% endfor %}
+</ol>
+{% endblock %}
