@@ -21,6 +21,7 @@ script:
 - rm -rf out
 - git add res *.html
 - find . -name index.html -exec git add {} \;
+- git add *.js
 - if [ `git diff --cached | wc -l` -ne 0 ] ; then  git commit -m"Static page generated" && git push deploy; fi
 before_install:
 - mkdir -p .travis
