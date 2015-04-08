@@ -16,8 +16,8 @@ script:
 - git checkout -b gh-pages deploy/gh-pages
 - git rm --ignore-unmatch -q -r res
 - git checkout master -- res
-- mv out/* .
 - find . -name "*.html" -exec git rm --ignore-unmatch -q {} \;
+- mv out/* .
 - rm -rf out
 - git add res *.html
 - find . -name index.html -exec git add {} \;
