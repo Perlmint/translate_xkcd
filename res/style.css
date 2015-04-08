@@ -104,6 +104,15 @@ button:hover {
 	text-align: right;
 }
 
+#random {
+	text-align: right;
+}
+
+#all_list {
+	list-style-type: none;
+	padding: 0;
+}
+
 @media all and (min-width: 821px) {
 	#container {
 		margin-top: 10px;
