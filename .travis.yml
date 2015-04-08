@@ -11,7 +11,7 @@ script:
 - git config user.email "omniavinco@gmail.com"
 - git config user.name "Gyusun Yeom"
 - git config push.default simple
-- git remote add deploy git@github.com:perlmint/translate_xkcd.git
+- git remote add deploy git@github.com:Perlmint/translate_xkcd.git
 - git fetch deploy
 - git checkout -b gh-pages deploy/gh-pages
 - find . -maxdepth 1 -name "*.html" -exec git rm --ignore-unmatch -q {} \;
