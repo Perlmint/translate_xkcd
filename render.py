@@ -42,8 +42,20 @@ def parse_info_file(filename):
 
   return dict
 
+def url_for(namespace, **kwargs):
+  url_set = {
+    'res': '%s/res/{filename}' % BASE_URL,
+    'content': '%s/{target}.html' % BASE_URL,
+    'source': 'https://github.com/perlmint/translate_xkcd'
+    }
+  return url_set[namespace].format(**kwargs)
+
 def make_redirect_page(source, target):
-  pass
+  out_dir = os.path.join(OUT_PATH, source)
+  out_path = os.path.join(out_dir, 'index.html')
+  if not os.path.isdir(out_dir):
+    os.makedirs(out_dir)
+  env.get_template('redirect.html').stream({ 'url': url_for('content', target=target) }).dump(out_path, encoding='utf-8')
 
 def render_content(template, data):
   out_filename = os.path.basename(data['__file__']).rsplit('.', 1)[0] + '.html'
@@ -56,14 +68,6 @@ def render_random(file_list):
 def render_index(file_list):
   out_path = os.path.join(OUT_PATH, 'index.html')
   env.get_template('index.html').stream({ 'list': file_list }).dump(out_path, encoding='utf-8')
-
-def url_for(namespace, **kwargs):
-  url_set = {
-    'res': '%s/res/{filename}' % BASE_URL,
-    'content': '%s/{target}.html' % BASE_URL,
-    'source': 'https://github.com/perlmint/translate_xkcd'
-    }
-  return url_set[namespace].format(**kwargs)
 
 env = Environment(loader=FileSystemLoader(TEMPLATE_PATH))
 env.globals['url_for'] = url_for
@@ -89,5 +93,6 @@ for file_index in range(len(file_list)):
 
 for info in file_infos:
   render_content(env.get_template('view.html'), info)
+  make_redirect_page(info['id'], info['cur'])
 
 render_index(file_infos)
