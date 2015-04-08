@@ -14,10 +14,12 @@ script:
 - git remote add deploy git@github.com:Perlmint/translate_xkcd.git
 - git fetch deploy
 - git checkout -b gh-pages deploy/gh-pages
-- find . -maxdepth 1 -name "*.html" -exec git rm --ignore-unmatch -q {} \;
+- pushd out
+- find . -name "*.html" -exec git rm --ignore-unmatch -q {} \;
+- popd
 - git rm --ignore-unmatch -q -r res
 - git checkout master -- res
-- mv out/*.html .
+- mv out/* .
 - git add res *.html
 - find . -name index.html -exec git add {} \;
 - if [ `git diff --cached | wc -l` -ne 0 ] ; then  git commit -m"Static page generated" && git push deploy; fi
