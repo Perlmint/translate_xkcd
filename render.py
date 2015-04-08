@@ -63,7 +63,19 @@ def render_content(template, data):
   template.stream(data).dump(out_path, encoding='utf-8')
   
 def render_random(file_list):
-  out_pat = os.path.join(OUT_PATH, 'random.js')
+  out_path = os.path.join(OUT_PATH, 'random.js')
+  with open(out_path, 'w') as o:
+    o.write('var list = [')
+    o.write(','.join([ '"%s"' % info['id'] for info in file_list ]))
+    o.write('];')
+
+    o.write('var getRandomID = function() {')
+    o.write('return list[Math.floor(Math.random() * list.length)];')
+    o.write('};')
+
+    o.write('var gotoRandomPage = function() {')
+    o.write('location.href = "./" + getRandomID() + "/index.html";')
+    o.write('};')
 
 def render_index(file_list):
   out_path = os.path.join(OUT_PATH, 'index.html')
@@ -96,3 +108,4 @@ for info in file_infos:
   make_redirect_page(info['id'], info['cur'])
 
 render_index(file_infos)
+render_random(file_infos)

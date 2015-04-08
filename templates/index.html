@@ -1,6 +1,9 @@
 {% extends "base.html" %}
 {% set data = {'title' : "xkcd"} %}
 {% block body %}
+<a href="#" onclick="gotoRandomPage()">
+  <h2>랜덤 페이지</h2>
+</a>
 <h2>목록</h2>
 <ol id="all_list">
 {% for info in list %}

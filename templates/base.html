@@ -12,6 +12,7 @@
     <meta name="{{ key }}" content="{{ value }}" />
     {% endfor %}
     {% endif -%}
+    <script src="random.js" async defer></script>
   </head>
   <body>
     <script src="https://apis.google.com/js/platform.js" async defer>{lang: 'ko'}</script>
@@ -48,6 +49,9 @@
           </a>
           --!>
         </div>
+	<div id="random">
+	  <a href="#" onclick="gotoRandomPage()">랜덤 페이지</a>
+	</div>
         <div id="origin_source">
           <a href="http://xkcd.com/{{ id | default('') }}">원본 링크</a>
         </div>

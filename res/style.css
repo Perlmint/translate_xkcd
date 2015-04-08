@@ -104,6 +104,10 @@ button:hover {
 	text-align: right;
 }
 
+#random {
+	text-align: right;
+}
+
 #all_list {
 	list-style-type: none;
 	padding: 0;
