@@ -2,6 +2,7 @@
 from jinja2 import Environment, FileSystemLoader
 import os, imp
 from glob import glob
+from copy import deepcopy
 
 DOMAIN = 'xkcd.omniavinco.kr'
 BASE_URL = 'http://%s' % DOMAIN
@@ -25,22 +26,22 @@ def get_file_list():
   return file_list
 
 def parse_info_file(filename):
-  dict = imp.load_source('', filename).__dict__
-  dict['id'] = os.path.basename(dict['__file__']).rsplit('.', 1)[0].split('.', 1)[0]
-  
-  if 'metas' not in dict:
-    dict['metas'] = {}
+  info_dict = {k: v for k, v in imp.load_source('', filename).__dict__.items() if not k.startswith('__') or k == '__file__'}
+  info_dict['id'] = os.path.basename(info_dict['__file__']).rsplit('.', 1)[0].split('.', 1)[0]
 
-  dict['metas']['twitter:domain'] = DOMAIN
-  dict['metas']['twitter:title'] = dict['title']
-  dict['metas']['twitter:creator'] = dict['creator']
-  dict['metas']['twitter:site'] = SITE_OWNER
+  if 'metas' not in info_dict:
+    info_dict['metas'] = {}
 
-  if dict['type'] == "image":
-    dict['metas']['twitter:card'] = 'photo'
-    dict['metas']['twitter:image:src'] = url_for('res', filename=dict['source'])
+  info_dict['metas']['twitter:domain'] = DOMAIN
+  info_dict['metas']['twitter:title'] = info_dict['title']
+  info_dict['metas']['twitter:creator'] = info_dict['creator']
+  info_dict['metas']['twitter:site'] = SITE_OWNER
 
-  return dict
+  if info_dict['type'] == "image":
+    info_dict['metas']['twitter:card'] = 'photo'
+    info_dict['metas']['twitter:image:src'] = url_for('res', filename=info_dict['source'])
+
+  return info_dict
 
 def url_for(namespace, **kwargs):
   url_set = {
@@ -61,7 +62,7 @@ def render_content(template, data):
   out_filename = os.path.basename(data['__file__']).rsplit('.', 1)[0] + '.html'
   out_path = os.path.join(OUT_PATH, out_filename)
   template.stream(data).dump(out_path, encoding='utf-8')
-  
+
 def render_random(file_list):
   out_path = os.path.join(OUT_PATH, 'random.js')
   with open(out_path, 'w') as o:
@@ -99,7 +100,7 @@ for file_index in range(len(file_list)):
   info['prev'] = get_target_name(prev_file)
   info['cur'] = get_target_name(file_name)
   info['next'] = get_target_name(next_file)
-  file_infos.append(info.copy())
+  file_infos.append(deepcopy(info))
   prev_file = file_name
   file_name = next_file
 
