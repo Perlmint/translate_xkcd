@@ -11,7 +11,9 @@
 {% endif %}
 <h1>{{ title | replace('_', ' ') | capitalize | safe }}</h1>
 {% if type == 'image' %}
-<img src="{{ url_for('res', filename=source) }}" />
+<img src="{{ url_for('res', filename=source) }}" {% if note -%}
+title="{{ note }}"
+{%- endif %}/>
 {% else %}
 {% endif %}
 {% endblock %}
