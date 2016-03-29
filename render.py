@@ -36,9 +36,10 @@ def parse_info_file(filename):
         for k, v in imp.load_source('', filename).__dict__.items()
         if not k.startswith('__') or k == '__file__'
     }
-    info_dict['id'] = os.path.basename(info_dict['__file__'])\
-                             .rsplit('.', 1)[0]\
-                             .split('.', 1)[0]
+    id = os.path.basename(info_dict['__file__'])\
+                .rsplit('.', 1)[0]
+    info_dict['id'] = id.split('.', 1)[0]
+    info_dict['eng_title'] = id.split('.', 1)[1]
 
     if 'metas' not in info_dict:
         info_dict['metas'] = {}
@@ -132,6 +133,7 @@ for file_index in range(len(file_list)):
 for info in file_infos:
     render_content(env.get_template('view.html'), info)
     make_redirect_page(info['id'], info['cur'])
+    make_redirect_page(info['eng_title'].replace('_', ' '), info['cur'])
 
 render_index(file_infos)
 render_random(file_infos)
