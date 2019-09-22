@@ -7,7 +7,7 @@ from copy import deepcopy
 from jinja2 import Environment, FileSystemLoader
 
 DOMAIN = 'xkcd.perlmint.app'
-BASE_URL = 'http://%s' % DOMAIN
+BASE_URL = '://%s' % DOMAIN
 SITE_OWNER = "@omniavinco"
 WORK_ROOT = os.path.dirname(os.path.abspath(__file__))
 TEMPLATE_PATH = os.path.join(WORK_ROOT, 'templates')
